@@ -4,9 +4,8 @@
     "target": {
       "namespace": "android_app",
       "package_name": "com.mmchospital.metrocare",
-      "sha256_cert_fingerprints": [
-        "5E:65:D8:04:3D:3D:BF:97:54:73:1C:84:0F:08:94:67:89:03:7D:42:A8:49:6E:0D:67:ED:FC:81:EA:93:9A:FA"
-      ]
+      "sha256_cert_fingerprints":
+        ["5E:65:D8:04:3D:3D:BF:97:54:73:1C:84:0F:08:94:67:89:03:7D:42:A8:49:6E:0D:67:ED:FC:81:EA:93:9A:FA"]
     }
   }
 ]
