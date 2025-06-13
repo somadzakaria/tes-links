@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Metrocare Product</title>
+
+  <!-- iOS (optional) -->
+  <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID, app-argument=metrocare://product/123">
+
+  <!-- Android -->
+  <link rel="alternate" href="android-app://com.mmchospital.metrocare/metrocare/product/123" />
+
+  <script>
+    window.onload = function () {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      const deepLink = 'metrocare://product/123';  // <-- ganti sesuai skema kamu
+      const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.mmchospital.metrocare';
+
+      window.location = deepLink;
+
+      setTimeout(function () {
+        if (/android/i.test(userAgent)) {
+          window.location = playStoreUrl;
+        } else {
+          document.getElementById('fallback').style.display = 'block';
+        }
+      }, 1500);
+    };
+  </script>
+</head>
+<body>
+  <h2>Membuka aplikasi Metrocare...</h2>
+  <p id="fallback" style="display: none;">
+    Aplikasi tidak terbuka? <a href="https://play.google.com/store/apps/details?id=com.mmchospital.metrocare">Klik di sini</a>
+  </p>
+</body>
+</html>
