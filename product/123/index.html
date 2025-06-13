@@ -20,15 +20,17 @@
 
     <script>
       window.onload = function () {
-        const userAgent =
-          navigator.userAgent || navigator.vendor || window.opera;
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-        const deepLink = "https://somadzakaria.github.io/tes-links/product/123";
+        // Deep link ke aplikasi
+        const deepLink = "metrocare://product/123";
         const playStoreUrl =
           "https://play.google.com/store/apps/details?id=com.mmchospital.metrocare";
 
+        // Coba buka aplikasi
         window.location = deepLink;
 
+        // Fallback ke Play Store setelah 1 detik jika gagal
         setTimeout(function () {
           if (/android/i.test(userAgent)) {
             window.location = playStoreUrl;
@@ -43,10 +45,7 @@
     <h2>Membuka aplikasi Metrocare...</h2>
     <p id="fallback" style="display: none">
       Aplikasi tidak terbuka?
-      <a
-        href="https://play.google.com/store/apps/details?id=com.mmchospital.metrocare"
-        >Klik di sini</a
-      >
+      <a href="https://play.google.com/store/apps/details?id=com.mmchospital.metrocare">Klik di sini</a>
     </p>
   </body>
 </html>
