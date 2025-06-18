@@ -1,77 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Konfirmasi Cuti MetroCare</title>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konfirmasi Cuti - MetroCare</title>
 
-  <!-- iOS -->
-  <meta name="apple-itunes-app" content="app-id=6479005021" />
+    <!-- Metadata untuk iOS -->
+    <meta
+      name="apple-itunes-app"
+      content="app-id=6479005021, app-argument=metrocare://leave/confirm"
+    />
 
-  <!-- Android -->
-  <link
-    rel="alternate"
-    href="android-app://com.mmchospital.metrocare/metrocare/leave/confirm"
-  />
+    <!-- Metadata untuk Android -->
+    <link
+      rel="alternate"
+      href="android-app://com.mmchospital.metrocare/metrocare/leave/confirm"
+    />
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      text-align: center;
-      background-color: #f2f2f2;
-    }
-
-    #fallback {
-      display: none;
-      margin-top: 1rem;
-    }
-
-    a {
-      color: #007bff;
-      text-decoration: none;
-    }
-  </style>
-
-  <script>
-    window.onload = function () {
-      const pathParts = window.location.pathname.split('/');
-      const id = pathParts[pathParts.length - 1] || null;
-
-      // Jika terakhir adalah "leave", ambil sebelumnya
-      const validId = isNaN(id) ? pathParts[pathParts.length - 2] : id;
-
-      if (!validId || isNaN(validId)) {
-        document.body.innerHTML = "<h2>Link tidak valid.</h2>";
-        return;
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding: 2rem;
       }
+      #fallback {
+        display: none;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Membuka aplikasi MetroCare...</h2>
+    <p id="fallback">
+      Aplikasi tidak terbuka? <br />
+      <a
+        href="https://play.google.com/store/apps/details?id=com.mmchospital.metrocare"
+        target="_blank"
+        >Klik di sini untuk membuka di Play Store</a
+      >
+    </p>
 
-      const deepLink = `metrocare://leave/confirm/${validId}`;
-      const playStore = "https://play.google.com/store/apps/details?id=com.mmchospital.metrocare";
-      const appStore = "https://apps.apple.com/app/id6479005021";
-      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    <script>
+      window.onload = function () {
+        const hash = window.location.hash; // contoh: #/1231
+        const id = hash.replace("#/", "");
 
-      // Coba buka aplikasi
-      window.location.href = deepLink;
-
-      // Fallback jika gagal buka app
-      setTimeout(function () {
-        if (/android/i.test(userAgent)) {
-          window.location.href = playStore;
-        } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-          window.location.href = appStore;
-        } else {
-          document.getElementById("fallback").style.display = "block";
+        // Validasi ID
+        if (!id || isNaN(id)) {
+          document.body.innerHTML = "<h2>Link tidak valid.</h2>";
+          return;
         }
-      }, 1000);
-    };
-  </script>
-</head>
-<body>
-  <h2>Membuka aplikasi MetroCare...</h2>
-  <p id="fallback">
-    Aplikasi tidak terbuka? <br />
-    <a href="https://play.google.com/store/apps/details?id=com.mmchospital.metrocare">Klik di sini</a> untuk membuka MetroCare.
-  </p>
-</body>
+
+        const deepLink = `metrocare://leave/confirm/${id}`;
+        const playStore =
+          "https://play.google.com/store/apps/details?id=com.mmchospital.metrocare";
+        const appStore = "https://apps.apple.com/app/id6479005021";
+        const userAgent =
+          navigator.userAgent || navigator.vendor || window.opera;
+
+        // Arahkan ke aplikasi
+        window.location.href = deepLink;
+
+        // Fallback ke store jika gagal dalam 1 detik
+        setTimeout(function () {
+          if (/android/i.test(userAgent)) {
+            window.location.href = playStore;
+          } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+            window.location.href = appStore;
+          } else {
+            document.getElementById("fallback").style.display = "block";
+          }
+        }, 1000);
+      };
+    </script>
+  </body>
 </html>
