@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metrocare Link</title>
+
+    <!-- iOS Deep Link Support -->
+    <meta
+      name="apple-itunes-app"
+      content="app-id=6479005021, app-argument=metrocare://confirm/leave"
+    />
+
+    <!-- Android Deep Link Support -->
+    <link
+      rel="alternate"
+      href="android-app://com.mmchospital.metrocare/metrocare/confirm/leave"
+    />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+      }
+
+      #fallback {
+        display: none;
+        margin-top: 20px;
+      }
+    </style>
+
+    <script>
+      window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id") || "leave";
+
+        const deepLink = `metrocare://confirm/${id}`;
+        const playStoreUrl =
+          "https://play.google.com/store/apps/details?id=com.mmchospital.metrocare";
+        const appStoreUrl =
+          "https://apps.apple.com/app/id6479005021";
+
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        // Open deep link
+        window.location = deepLink;
+
+        setTimeout(function () {
+          if (/android/i.test(userAgent)) {
+            window.location = playStoreUrl;
+          } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            window.location = appStoreUrl;
+          } else {
+            document.getElementById("fallback").style.display = "block";
+          }
+        }, 1500);
+      };
+    </script>
+  </head>
+  <body>
+    <h2>Membuka aplikasi Metrocare...</h2>
+    <p id="fallback">
+      Jika aplikasi tidak terbuka secara otomatis, silakan unduh melalui:
+      <br />
+      <a href="https://play.google.com/store/apps/details?id=com.mmchospital.metrocare" target="_blank">Google Play Store</a> /
+      <a href="https://apps.apple.com/app/id6479005021" target="_blank">App Store</a>
+    </p>
+  </body>
+</html>
