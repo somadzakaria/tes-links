@@ -1,77 +1,51 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Konfirmasi Cuti - MetroCare</title>
+    <title>Metrocare Product</title>
 
-    <!-- Metadata untuk iOS -->
+    <!-- iOS (optional) -->
     <meta
       name="apple-itunes-app"
-      content="app-id=6479005021, app-argument=metrocare://leave/confirm"
+      content="app-id=6479005021, app-argument=metrocare://product"
     />
 
-    <!-- Metadata untuk Android -->
+    <!-- Android -->
     <link
       rel="alternate"
-      href="android-app://com.mmchospital.metrocare/metrocare/leave/confirm"
+      href="android-app://com.mmchospital.metrocare/metrocare/product"
     />
-
-    <style>
-      body {
-        font-family: sans-serif;
-        text-align: center;
-        padding: 2rem;
-      }
-      #fallback {
-        display: none;
-        margin-top: 1rem;
-      }
-    </style>
-  </head>
-  <body>
-    <h2>Membuka aplikasi MetroCare...</h2>
-    <p id="fallback">
-      Aplikasi tidak terbuka? <br />
-      <a
-        href="https://play.google.com/store/apps/details?id=com.mmchospital.metrocare"
-        target="_blank"
-        >Klik di sini untuk membuka di Play Store</a
-      >
-    </p>
 
     <script>
       window.onload = function () {
-        const hash = window.location.hash; // contoh: #/1231
-        const id = hash.replace("#/", "");
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-        // Validasi ID
-        if (!id || isNaN(id)) {
-          document.body.innerHTML = "<h2>Link tidak valid.</h2>";
-          return;
-        }
+        // Ambil ID dari hash (#)
+        const id = window.location.hash.replace("#", "") || "default";
 
-        const deepLink = `metrocare://leave/confirm/${id}`;
-        const playStore =
-          "https://play.google.com/store/apps/details?id=com.mmchospital.metrocare";
-        const appStore = "https://apps.apple.com/app/id6479005021";
-        const userAgent =
-          navigator.userAgent || navigator.vendor || window.opera;
+        const deepLink = `metrocare://product/${id}`;
+        const playStoreUrl = "https://play.google.com/store/apps/details?id=com.mmchospital.metrocare";
 
-        // Arahkan ke aplikasi
-        window.location.href = deepLink;
+        // Coba buka aplikasi
+        window.location = deepLink;
 
-        // Fallback ke store jika gagal dalam 1 detik
-        setTimeout(function () {
+        // Fallback ke Play Store
+        setTimeout(() => {
           if (/android/i.test(userAgent)) {
-            window.location.href = playStore;
-          } else if (/iPad|iPhone|iPod/.test(userAgent)) {
-            window.location.href = appStore;
+            window.location = playStoreUrl;
           } else {
             document.getElementById("fallback").style.display = "block";
           }
         }, 1000);
       };
     </script>
+  </head>
+  <body>
+    <h2>Membuka aplikasi Metrocare...</h2>
+    <p id="fallback" style="display: none">
+      Aplikasi tidak terbuka?
+      <a href="https://play.google.com/store/apps/details?id=com.mmchospital.metrocare">Klik di sini</a>
+    </p>
   </body>
 </html>

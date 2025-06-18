@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+      const fullPath = window.location.pathname;
+      const basePath = "/tes-links/confirm/leave/";
+      if (fullPath.startsWith(basePath)) {
+        const id = fullPath.replace(basePath, "");
+        window.location.replace(basePath + "index.html#" + id);
+      } else {
+        document.write("Halaman tidak ditemukan.");
+      }
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
