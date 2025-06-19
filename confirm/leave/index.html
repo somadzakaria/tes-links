@@ -3,18 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Metrocare Product</title>
+    <title>Metrocare</title>
 
     <!-- iOS (optional) -->
     <meta
       name="apple-itunes-app"
-      content="app-id=6479005021, app-argument=metrocare://product"
+      content="app-id=6479005021, app-argument=metrocare://leave"
     />
 
     <!-- Android -->
     <link
       rel="alternate"
-      href="android-app://com.mmchospital.metrocare/metrocare/product"
+      href="android-app://com.mmchospital.metrocare/metrocare/leave"
     />
 
     <script>
@@ -24,7 +24,7 @@
         // Ambil ID dari hash (#)
         const id = window.location.hash.replace("#", "") || "default";
 
-        const deepLink = `metrocare://product/${id}`;
+        const deepLink = `metrocare://leave/${id}`;
         const playStoreUrl = "https://play.google.com/store/apps/details?id=com.mmchospital.metrocare";
 
         // Coba buka aplikasi
